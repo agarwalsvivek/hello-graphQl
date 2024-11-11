@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraphQL Hello World</title>
+</head>
+
+<body>
+    <h1>GraphQL Hello World</h1>
+    <div id="result"></div>
+
+    <script>
+        // GraphQL query
+        const query = `
+      query {
+        hello
+      }
+    `;
+
+        // Fetch the GraphQL data from the server
+        fetch('http://localhost:4000/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ query }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').textContent = data.data.hello;
+            })
+            .catch(error => console.error('Error fetching GraphQL data:', error));
+    </script>
+</body>
+
+</html> 
